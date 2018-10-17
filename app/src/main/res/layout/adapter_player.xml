@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="player"
+            type="com.kayakstudio.smalacomponents.swipefoldercard.Player" />
+
+        <variable
+            name="callBack"
+            type="com.kayakstudio.smalacomponents.swipefoldercard.CallBackPlayer" />
+    </data>
+
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:animationDuration="1000"
+        app:backSideColor="#9e9b9b"
+        app:cameraHeight="20">
+
+        <include
+            layout="@layout/content_folding"
+            app:callBack="@{callBack}"
+            app:foldingCell="@{foldingCell}"
+            app:player="@{player}" />
+
+        <FrameLayout
+            android:id="@+id/cell_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ru.rambler.libs.swipe_layout.SwipeLayout
+                android:id="@+id/adapter_swipeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!--  main layout here -->
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFF"
+                    android:onClick="@{() -> callBack.expend(foldingCell)}">
+
+                    <ImageView
+                        android:id="@+id/icon_valid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_check_green_24dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{player.name}"
+                        app:layout_constraintEnd_toStartOf="@+id/text2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Malik" />
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{player.club}"
+                        tools:text="Malik"
+                        app:layout_constraintEnd_toStartOf="@+id/icon_valid"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/text"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{player.nationality}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/text4"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text"
+                        tools:text="Malik" />
+
+                    <TextView
+                        android:id="@+id/text4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{player.age}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/text3"
+                        app:layout_constraintTop_toBottomOf="@+id/text2"
+                        tools:text="Malik" />
+                </android.support.constraint.ConstraintLayout>
+
+                <!-- Left -->
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:gravity="left">
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:background="#fd7b68"
+                        android:src="@drawable/ic_delete_black_24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/edit"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:background="#d3d3d3"
+                        android:src="@drawable/ic_edit_black_24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/delete"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <FrameLayout
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    app:bring_to_clamp="no"
+                    app:clamp="self"
+                    app:gravity="right"
+                    app:sticky="self">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/valid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#00d785"
+                            android:src="@drawable/ic_check_black_24dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+                    </android.support.constraint.ConstraintLayout>
+                </FrameLayout>
+            </ru.rambler.libs.swipe_layout.SwipeLayout>
+        </FrameLayout>
+    </com.ramotion.foldingcell.FoldingCell>
+
+</layout>
